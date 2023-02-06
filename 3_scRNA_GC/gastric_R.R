@@ -1,0 +1,11 @@
+library(Seurat)
+library(data.table)
+setwd('./paper/3_scRNA_GC/')
+dir.create('1_Cluster')
+setwd('./1_Cluster/')
+dc<- Read10X('../Data/gastric-cancer-main/00.Processed Data/gcmatrix/')
+dcmeta <- fread('../Data/gastric-cancer-main/00.Processed Data/cell_metadata.csv')
+
+gc <- CreateSeuratObject(dc, meta.data = dcmeta)
+gc <- NormalizeData(gc, verbose = FALSE)
+gc <- ScaleData(gc, verbose = F)
